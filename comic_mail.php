@@ -1,4 +1,22 @@
 <?php
+session_start();
+
+$DATABASE_HOST = '127.0.0.1:3307';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'phplogin';
+
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
+$unsubscribe_value = $con->prepare('select unsubscribe from accounts where id = ?');
+$unsubscribe_value->bind_param('i', $_SESSION['id']);
+$unsubscribe_value->execute();
+// $unsubscribe_value->store_result();
+$result = $unsubscribe_value->get_result();
+$result = $result->fetch_array();
+// $saved = $result['unsubscribe'];
+
+function newComic(){
     $sourceURL="https://c.xkcd.com/random/comic/";
     $data=file_get_contents($sourceURL);
 
@@ -25,7 +43,6 @@
         $from_name = "KomixDose by Khushi Makhecha";
         $from_mail = "makhechakhushi@gmail.com";
         $mail_to = "sparkler.star001@gmail.com";
-        $to      = 'sparkler.star001@gmail.com';
         $subject = "Your Latest XKCD Comic Dose";
         $message = '
         <html>
@@ -34,7 +51,8 @@
         </head>
         <body> 
             <h1>'.$imgTitle.'</h1>
-            <img src='.$imgLink.' alt='.$imgAlt.'>
+            <img src='.$imgLink.' alt='.$imgAlt.'<br>
+            <a href="http://localhost:8080/phplogin/unsubscribe.php">Unsubscribe KomixDose?</a>
         </body>
         </html>';
 
@@ -68,8 +86,22 @@
             echo '<h3>Failure</h3>';
             echo '<p>Failed to send email to '.$to.'</p>';
         } else {
-            echo '<p>Your email has been sent to '.$to.' successfully.</p>';
+            echo '<p>Your email has been sent to '.$mail_to.' successfully.</p>';
         }
     }
-    
+}
+
+newComic();
+// function mailSender(){
+//     global $saved;
+//     if($saved === 0){
+//         newComic(); 
+//         // sleep(300);
+//         // mailSender();   
+//     }
+//     else{
+//         echo "The user has unsubscribed!";
+//     }
+// }
+
 ?>

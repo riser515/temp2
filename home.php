@@ -28,6 +28,9 @@ if (!isset($_SESSION['loggedin'])) {
 		<div class="content">
 			<h2>KomixDose</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
+			<p>Thank you for subscribing to <strong>KomixDose</strong>!</p> 
+			<p>We deliver random interesting comics to your inbox, every 5 minutes.</p>
 		</div>
+			<a href="http://localhost:8080/phplogin/unsubscribe.php">Unsubscribe KomixDose</a>
 	</body>
 </html>
