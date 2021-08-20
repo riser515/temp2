@@ -1,54 +1,77 @@
+:root {
+  --color-white: #fff;
+  --color-border: #dee0e4;
+  --content-bg: #3274d6;
+  --color-darker: #5b6574;
+}
+
 .navtop {
-  background-color: #2f3947;
-  height: 60px;
-  width: 100%;
+  background-color: var(--content-bg);
+  height: 10vh;
+  width: 100vw;
   border: 0;
 }
+
 .navtop div {
   display: flex;
-  margin: 0 auto;
-  width: 1000px;
+  /* margin: 0 auto; */
+  margin: 0 0;
+  width: 100vw;
   height: 100%;
 }
+
 .navtop div h1,
 .navtop div a {
   display: inline-flex;
   align-items: center;
 }
+
 .navtop div h1 {
+  font-family: "Londrina Solid";
   flex: 1;
-  font-size: 24px;
-  padding: 0;
+  font-size: 1.5rem;
+  padding: 1.5rem;
   margin: 0;
-  color: #eaebed;
-  font-weight: normal;
+  color: #fff;
+  font-weight: 400;
 }
+
 .navtop div a {
-  padding: 0 20px;
+  padding: 0 1.25rem;
   text-decoration: none;
   color: #c1c4c8;
   font-weight: bold;
 }
+
+.navtop div a:first-of-type {
+  margin-left: 70vw;
+}
+
 .navtop div a i {
-  padding: 2px 8px 0 0;
+  padding: 0.125rem 0.5rem 0 0;
 }
+
 .navtop div a:hover {
-  color: #eaebed;
+  color: #fff;
 }
-body.loggedin {
+
+.loggedin {
   background-color: #f3f4f7;
 }
+
 .content {
-  width: 1000px;
+  width: 99vw;
   margin: 0 auto;
 }
-.content h2 {
+
+.content strong {
   margin: 0;
-  padding: 25px 0;
-  font-size: 22px;
+  padding: 1.5rem 0;
+  font-size: 1.45rem;
   border-bottom: 1px solid #e0e0e3;
   color: #4a536e;
 }
+
 .content > p,
 .content > div {
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);

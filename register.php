@@ -39,18 +39,18 @@ if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
 	exit('Password must be between 5 and 20 characters long!');
 }
 
-// If the account with that username exists.
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
+// If the account with that email exists.
+if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), hash the password using the PHP password_hash function.
-	$stmt->bind_param('s', $_POST['username']);
+	$stmt->bind_param('s', $_POST['email']);
 	$stmt->execute();
 	$stmt->store_result();
 	// Store the result so we can check if the account exists in the database.
 	if ($stmt->num_rows > 0) {
-		// Username already exists
-		echo 'Username exists, please choose another!';
+		// Email already exists
+		echo 'This email is already registered with KomixDose!';
 	} else {
-        // Username doesn't exist, insert new account
+        // Email doesn't exist, insert new account
         if ($stmt = $con->prepare('INSERT INTO accounts (username, password, email, activation_code) VALUES (?, ?, ?, ?)')) {
             // Hash the password and use password_verify when a user logs in.
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);

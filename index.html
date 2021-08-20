@@ -8,19 +8,25 @@
       href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     />
     <link href="style_login.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="login">
-      <h1>Login to KomixDose</h1>
+      <h1>Login to <span class="komixdose">KomixDose</span></h1>
       <form action="authenticate.php" method="post">
-        <label for="username">
+        <label for="email">
           <i class="fas fa-user"></i>
         </label>
         <input
           type="text"
-          name="username"
-          placeholder="Username"
-          id="username"
+          name="email"
+          placeholder="Email"
+          id="email"
           required
         />
         <label for="password">

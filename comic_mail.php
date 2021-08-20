@@ -91,17 +91,29 @@ function newComic(){
     }
 }
 
-newComic();
 // function mailSender(){
 //     global $saved;
 //     if($saved === 0){
 //         newComic(); 
-//         // sleep(300);
-//         // mailSender();   
+//         sleep(300);
+//         mailSender();   
 //     }
 //     else{
 //         echo "The user has unsubscribed!";
 //     }
 // }
 
+// mailSender();
+
+function setInterval($f, $milliseconds)
+{
+    $seconds=(int)$milliseconds/1000;
+    while(true)
+    {
+        $f();
+        sleep($seconds);
+    }
+}
+
+setInterval($newComic, 10000);
 ?>
