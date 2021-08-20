@@ -17,21 +17,25 @@ $result = $result->fetch_array();
 // $saved = $result['unsubscribe'];
 
 function newComic(){
-    $sourceURL="https://c.xkcd.com/random/comic/";
-    $data=file_get_contents($sourceURL);
-
-    if(preg_match('%(Permanent\slink\sto\sthis\scomic:\shttps://xkcd.com/)(\d+)%', $data, $match)){
-        $saved = substr($match[0], 30);
-        $to_be_added = '/info.0.json';
-        $saved .= $to_be_added;
-
-        $data = file_get_contents($saved); // put the contents of the file into a variable
-        $characters = json_decode($data);
+        $url = "https://c.xkcd.com/random/comic/";
+        $ch  = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        // Must be set to true so that PHP follows any "Location:" header.
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // $a will contain all headers.
+        $a = curl_exec($ch);
+        // Returns the last effective URL.
+        $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
         
-        $imgTitle = $characters->{'title'} . '<br>';
-        $imgAlt = $characters->{'alt'} . '<br>';
+        $data = file_get_contents($url.'info.0.json'); // put the contents of the file into a variable
+        $characters = json_decode($data, true);
+        
+        $imgTitle = $characters['title'];
+        $imgAlt = $characters['alt'];
         // $imgLink = $characters->{'img'} . '<br>';
-        $imgLink = $characters->{'img'};
+        $imgLink = $characters['img'];
 
         $imgFile = file_get_contents($imgLink);
         $imgFileName = explode("/", $imgLink);
@@ -57,9 +61,8 @@ function newComic(){
         </html>';
 
         $content = chunk_split(base64_encode($imgFile));
-        // A random hash will be necessary to send mixed content.
+        // A random hash for sending mixed content.
         $uid = md5(uniqid(time()));
-        // Carriage return type (RFC).
         $eol = PHP_EOL;
 
         $headers = "From: ".$from_name." <".$from_mail.">".$eol;
@@ -83,37 +86,15 @@ function newComic(){
         $success = mail($mail_to, $subject, $body, $headers);
 
         if ($success === false) {
-            echo '<h3>Failure</h3>';
-            echo '<p>Failed to send email to '.$to.'</p>';
+            echo '<h3>Failure</h3>;
+            <p>Failed to send email to '.$to.'</p>';
+            // flush();
         } else {
             echo '<p>Your email has been sent to '.$mail_to.' successfully.</p>';
+            // flush();
+            // header('Location: temp.php');
         }
     }
-}
 
-// function mailSender(){
-//     global $saved;
-//     if($saved === 0){
-//         newComic(); 
-//         sleep(300);
-//         mailSender();   
-//     }
-//     else{
-//         echo "The user has unsubscribed!";
-//     }
-// }
-
-// mailSender();
-
-function setInterval($f, $milliseconds)
-{
-    $seconds=(int)$milliseconds/1000;
-    while(true)
-    {
-        $f();
-        sleep($seconds);
-    }
-}
-
-setInterval($newComic, 10000);
+newComic();
 ?>
