@@ -6,18 +6,19 @@ if (mysqli_connect_errno()) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 // First we check if the email and code exists...
-if (isset($_GET['email'], $_GET['code'])) {
+if (isset($_POST['code'])) {
 	if ($stmt = $con->prepare('SELECT * FROM accounts WHERE email = ? AND activation_code = ?')) {
-		$stmt->bind_param('ss', $_GET['email'], $_GET['code']);
+		$stmt->bind_param('ss', $_POST['email'], $_POST['code']);
 		$stmt->execute();
 		// Store the result so we can check if the account exists in the database.
 		$stmt->store_result();
+
 		if ($stmt->num_rows > 0) {
 			// Account exists with the requested email and code.
 			if ($stmt = $con->prepare('UPDATE accounts SET activation_code = ? WHERE email = ? AND activation_code = ?')) {
 				// Set the new activation code to 'activated', to check if the user has activated his account.
 				$newcode = 'activated';
-				$stmt->bind_param('sss', $newcode, $_GET['email'], $_GET['code']);
+				$stmt->bind_param('sss', $newcode, $_POST['email'], $_POST['code']);
 				$stmt->execute();
 				echo 'Your account is now activated! You can now <a href="index.html">login</a>!';
 			}

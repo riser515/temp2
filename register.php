@@ -48,16 +48,43 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ?')) 
         if ($stmt = $con->prepare('INSERT INTO accounts (username, password, email, activation_code) VALUES (?, ?, ?, ?)')) {
             // Hash the password and use password_verify when a user logs in.
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $uniqid = uniqid();
+            $uniqid = random_int(100000, 999999);
             $stmt->bind_param('ssss', $_POST['username'], $password, $_POST['email'], $uniqid);
             $stmt->execute();
-            $from    = 'makhechakhushi@gmail.com';
+            
+			$from_name = "KomixDose by Khushi Makhecha";
+			$from_mail = "makhechakhushi@gmail.com";
             $subject = 'Account Activation Required';
-            $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
-            $activate_link = 'http://localhost:8080/phplogin/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
-            $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
-            mail($_POST['email'], $subject, $message, $headers);
-            echo 'Please check your email to activate your account!';
+            $message = '
+			<html>
+			<body>
+			<p>Please enter this code to activate your account: ' . $uniqid. ' </p>
+			</body>
+			</html>
+			';
+			
+			// A random hash for sending mixed content.
+			$uid = md5(uniqid(time()));
+			$eol = PHP_EOL;
+
+			$headers = "From: ".$from_name." <".$from_mail.">".$eol;
+			$headers .= 'MIME-Version: 1.0'.$eol;
+			$headers .= "Content-Type: multipart/mixed; boundary=\"{$uid}\"".$eol;
+			
+			// Message.
+			$body  = '--'.$uid.$eol;
+			$body .= "Content-Type: text/html; charset=\"UTF-8\"".$eol;
+			$body .= 'Content-Transfer-Encoding: 7bit'.$eol;
+			$body .= $message.$eol;
+
+            $success = mail($_POST['email'], $subject, $body, $headers);
+
+			if ($success === false) {
+				echo '<h3>Failure</h3>;
+				<p>Failed to send email to '.$_POST['email'].'</p>';
+			} else {
+				echo '<p>Your email has been sent to '.$_POST['email'].' successfully.</p>';
+			}
         } else {
             // Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
             echo 'Technical issue encountered!';
@@ -70,3 +97,27 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ?')) 
 }
 $con->close();
 ?>
+
+<html>
+<head>
+<title>KomixDose</title>
+</head>
+<body>
+<form action="activate.php" method="post" autocomplete="off">
+<input
+type="email"
+name="email"
+placeholder="Enter your registered email id"
+id="email"
+required
+/>
+<input
+type="text"
+name="code"
+placeholder="Enter your code"
+id="code"
+required
+/>
+<input type="submit" value="Verify" />
+</body>
+</html>
