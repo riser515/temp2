@@ -105,18 +105,18 @@ $con->close();
 <body>
 <form action="activate.php" method="post" autocomplete="off">
 <input
-type="email"
-name="email"
-placeholder="Enter your registered email id"
-id="email"
-required
+	type="email"
+	name="email"
+	placeholder="Enter your registered email id"
+	id="email"
+	required
 />
 <input
-type="text"
-name="code"
-placeholder="Enter your code"
-id="code"
-required
+	type="text"
+	name="code"
+	placeholder="Enter your code"
+	id="code"
+	required
 />
 <input type="submit" value="Verify" />
 </body>
