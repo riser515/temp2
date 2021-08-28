@@ -1,6 +1,6 @@
 <?php
 // session_start();
-// include_once('db_con.php');
+include_once('db_con.php');
 
 // Database connection info.
 $DATABASE_HOST = '127.0.0.1:3307';

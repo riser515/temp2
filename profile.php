@@ -7,22 +7,17 @@ if (!isset($_SESSION['loggedin'])) {
 	exit;
 }
 
-// include_once('db_con.php');
-
-// Database connection info.
-$DATABASE_HOST = '127.0.0.1:3307';
-$DATABASE_USER = 'root';
-$DATABASE_PASS = '';
-$DATABASE_NAME = 'phplogin';
-
-global $con;
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+include_once('db_con.php');
 
 if (mysqli_connect_errno()) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-if(@$_POST['continue'] == 1){
+if ($account['activation_code'] != 'activated') {
+	header("Location: index.html");
+} 
+
+if($_POST['continue']){
   // We don't have the password or email info stored in sessions so instead we can get the results from the database.
   $stmt = $con->prepare('SELECT password, email FROM accounts WHERE id = ?');
   // In this case we can use the account ID to get the account info.
