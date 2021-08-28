@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('/php/db_con.php');
+include_once('db_con.php');
 
 // If there is an error with the connection, stop the script and display the error.
 if ( mysqli_connect_errno() ) {
@@ -31,7 +31,7 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $username;
             $_SESSION['id'] = $id;
-            header('Location: /php/home.php');
+            header('Location: home.php');
         } else {
             // Incorrect password
             $msg = "Incorrect email and/or password!</p>";
