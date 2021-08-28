@@ -3,7 +3,7 @@ session_start();
 include_once('db_con.php');
 
 if ($account['activation_code'] != 'activated') {
-	header("Location: index.html");
+	header("Location: index.php");
 }
 
 if(@$_POST['submit'] == 1){

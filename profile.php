@@ -3,7 +3,7 @@
 session_start();
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+	header('Location: index.php');
 	exit;
 }
 
@@ -14,7 +14,7 @@ if (mysqli_connect_errno()) {
 }
 
 if ($account['activation_code'] != 'activated') {
-	header("Location: index.html");
+	header("Location: index.php");
 } 
 
 if($_POST['continue']){
