@@ -46,7 +46,7 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="parallax.css" />
+    <link rel="stylesheet" type="text/css" href="/css/parallax.css" />
   </head>
   <body>
     <div class="container">

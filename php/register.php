@@ -99,8 +99,8 @@ $con->close();
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="parallax.css" />
-    <link rel="stylesheet" type="text/css" href="register_input.css" />
+    <link rel="stylesheet" type="text/css" href="/css/parallax.css" />
+    <link rel="stylesheet" type="text/css" href="/css/register_input.css" />
   </head>
   <body>
     <div class="container">

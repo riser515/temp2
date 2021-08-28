@@ -1,44 +1,41 @@
 <?php
-// Starting session
+// We need to use sessions, so you should always start sessions using the below code.
 session_start();
-
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+
+include_once('db_con.php');
+
+if (mysqli_connect_errno()) {
+	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+}
+
+if ($account['activation_code'] != 'activated') {
+	header("Location: index.html");
+} 
+
+if($_POST['continue']){
+  // We don't have the password or email info stored in sessions so instead we can get the results from the database.
+  $stmt = $con->prepare('SELECT password, email FROM accounts WHERE id = ?');
+  // In this case we can use the account ID to get the account info.
+  $stmt->bind_param('i', $_SESSION['id']);
+  $stmt->execute();
+  $stmt->bind_result($password, $email);
+  $stmt->fetch();
+  $stmt->close();
+}
+else{
+  header("Location: home.php");
+}
 ?>
-<!-- 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>KomixDose</title>
-		<link href="color_card.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-	</head>
-	<body class="loggedin">
-		<nav class="navtop">
-			<div>
-				<h1>KomixDose</h1>
-				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			</div>
-		</nav>
-		<div class="content">
-			<h2>KomixDose</h2>
-			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-			<p>Thank you for subscribing to <strong>KomixDose</strong>!</p> 
-			<p>We deliver random interesting comics to your inbox, every 5 minutes.</p>
-		</div>
-			<a href="http://localhost:8080/phplogin/unsubscribe.php">Unsubscribe KomixDose</a>
-	</body>
-</html> -->
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="parallax.css" />
-    <link rel="stylesheet" type="text/css" href="nav.css" />
+    <link rel="stylesheet" type="text/css" href="/css/parallax.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -54,7 +51,7 @@ if (!isset($_SESSION['loggedin'])) {
         </li>
         <li>
           <a href="profile.html">Profile</a>
-          </li>
+        </li>
         <li>
           <a href="unsubscribe.html">Unsubscribe</a>
         </li>
@@ -68,15 +65,22 @@ if (!isset($_SESSION['loggedin'])) {
         <div class="front side">
           <div class="content one">
             <h1>KomixDose</h1>
-            <p>
-              Hey <span><?=$_SESSION['name']?></span>, open your email inbox and
-              have fun!
+            <p>Your account details are as below:</p>
+            <p class="details">
+              <span>Username:</span>
+              <?=$_SESSION['name']?>
             </p>
-            <p>
-              <em
-                >For more details about <span>KomixDose</span>, hover anywhere
-                on this card.</em
-              >
+
+            <p class="details">
+              <span>Password:</span>
+              Your password is
+              <?=strlen($_SESSION['name'])?>
+              characters long.
+            </p>
+
+            <p class="details">
+              <span>Email:</span>
+              <?=$email?>
             </p>
           </div>
         </div>
@@ -96,7 +100,3 @@ if (!isset($_SESSION['loggedin'])) {
     </div>
   </body>
 </html>
-
-<?php 
-	include_once('comic_mail.php');
-?>

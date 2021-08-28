@@ -20,15 +20,3 @@ else{
   header("Location: home.php");
 }
 ?>   
-
-<!-- <html>  
-<center>  
-<form method="post">  
-<p>Do you really want to unsubscribe?</p>
-<input type="radio" name="unsubscribe" value=1/>Unsubscribe
-<input type="radio" name="unsubscribe" value=0/>No
-<input type="submit" name="submit" value="Submit"/>
-</form>  
-</center>
-</body>  
-</html>   -->
