@@ -3,7 +3,7 @@ include_once('db_con.php');
 
 if (mysqli_connect_errno()) {
 	// If there is an error with the connection, stop the script and display the error.
-	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+	$msg = 'Failed to connect to MySQL: ' . mysqli_connect_error();
 }
 // First we check if the email and code exists...
 if (isset($_POST['code'])) {
@@ -20,11 +20,40 @@ if (isset($_POST['code'])) {
 				$newcode = 'activated';
 				$stmt->bind_param('sss', $newcode, $_POST['email'], $_POST['code']);
 				$stmt->execute();
-				echo 'Your account is now activated! You can now <a href="index.html">login</a>!';
+				$msg = 'Your account is now activated! You can now login!';
 			}
 		} else {
-			echo 'The account is already activated or doesn\'t exist!';
+			$msg = 'The account is already activated or doesn\'t exist!';
 		}
 	}
 }
 ?>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="parallax.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="front side">
+        <div class="content one">
+          <h1>KomixDose</h1>
+          <p><?php echo $msg; ?></p>
+          <p><em>For more details about <span>KomixDose</span>, hover anywhere on this card.</em></p>
+        </div>
+      </div>
+      <div class="back side">
+        <div class="content two">
+          <p>
+            "Subscribe to KomixDose to receive hilarious comics every 5 minutes,
+            in your mail box!"
+          </p>
+          <p>
+            "We provide free random comics from the well-known webcomic
+            <a href="https://c.xkcd.com/random/comic/">XKCD Comics</a>."
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

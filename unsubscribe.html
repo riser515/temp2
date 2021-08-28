@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="parallax.css" />
+    <link rel="stylesheet" type="text/css" href="nav.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <a href="home.php">Home</a>
+        </li>
+        <li>
+          <a href="profile.html">Profile</a>
+        </li>
+        <li>
+          <a href="unsubscribe.html">Unsubscribe</a>
+        </li>
+        <li>
+          <a href="logout.php">Logout</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="body__container">
+      <div class="container">
+        <div class="front side">
+          <div class="content one">
+            <h1>KomixDose</h1>
+            <p>You are about to unsubscribe.</p>
+            <p>
+              <em>Hover anywhere to proceed with unsubscription.</em>
+            </p>
+          </div>
+        </div>
+        <div class="back side">
+          <div class="content two">
+            <p>Are you sure to unsubscribe?</p>
+            <form action="unsubscribe.php" method="post">
+              <div class="inputbox">
+                <input type="radio" name="continue" value="1" />Yes
+              </div>
+              <div class="inputbox">
+                <input type="radio" name="continue" value="0" />No
+              </div>
+              <div class="inputbox">
+                <input type="submit" name="submit" value="Submit" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

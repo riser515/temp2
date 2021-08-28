@@ -4,12 +4,12 @@ include_once('db_con.php');
 
 // If there is an error with the connection, stop the script and display the error.
 if ( mysqli_connect_errno() ) {
-	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+	$msg = 'Failed to connect to MySQL: ' . mysqli_connect_error();
 }
 
 // Could not get the data from the form, that should have been sent by the user.
 if ( !isset($_POST['email'], $_POST['password']) ) {
-	exit(`<h2>Please fill both the email and password fields!</h2>`);
+	$msg = `<h2>Please fill both the email and password fields!</h2>`;
 }
 
 // Preparing the SQL statements to prevent SQL injection.
@@ -34,12 +34,41 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
             header('Location: home.php');
         } else {
             // Incorrect password
-            echo "<p style='color:red;'>Incorrect email and/or password!</p>";
+            $msg = "Incorrect email and/or password!</p>";
         }
     } else {
         // Incorrect email
-        echo 'Incorrect email address!';
+        $msg = 'Incorrect email address!';
     }
 	$stmt->close();
 }
 ?>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="parallax.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="front side">
+        <div class="content one">
+          <h1>KomixDose</h1>
+          <p><?php echo $msg; ?></p>
+          <p><em>For more details about <span>KomixDose</span>, hover anywhere on this card.</em></p>
+        </div>
+      </div>
+      <div class="back side">
+        <div class="content two">
+          <p>
+            "Subscribe to KomixDose to receive hilarious comics every 5 minutes,
+            in your mail box!"
+          </p>
+          <p>
+            "We provide free random comics from the well-known webcomic
+            <a href="https://c.xkcd.com/random/comic/">XKCD Comics</a>."
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

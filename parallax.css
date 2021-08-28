@@ -1,0 +1,131 @@
+:root {
+  --color-new: #af13ec;
+  --color-bg: #dbdbdb;
+  --color-white: #fff;
+  --color-border: #dee0e4;
+  --content-bg: #3274d6;
+  --color-darker: #5b6574;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  position: relative;
+  background-color: #111;
+  font-family: sans-serif;
+}
+span {
+  font-family: "Londrina Solid";
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: capitalize;
+  font-weight: 400;
+}
+.body__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  margin-top: 15vh;
+  min-width: 500px;
+  min-height: 300px;
+  border-radius: 25px;
+  position: relative;
+  transition: 1.5s ease-in-out;
+  transform-style: preserve-3d;
+  background-color: var(--color-bg);
+}
+.side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #111;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 20px 50px;
+  box-shadow: inset 0 0 20px hsla(0, 0%, 0%, 0.5);
+}
+.content {
+  transform: translateZ(90px) scale(0.8);
+  line-height: 1.5em;
+}
+.content.one h1 {
+  position: relative;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 35px;
+  color: var(--color-new);
+}
+.content.one h2 {
+  margin-top: 40px;
+}
+.content.one p {
+  margin-top: 30px;
+  line-height: 1.5em;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: 700;
+}
+.front {
+  z-index: 2;
+}
+.back {
+  z-index: 0;
+  transform: rotateY(180deg);
+  background-color: var(--color-bg);
+}
+.content.two p {
+  font-family: sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.5em;
+  padding: 10px;
+  margin: 15px;
+}
+.content.two p a {
+  text-decoration: none;
+}
+.content.two p a:active {
+  color: var(--color-new);
+}
+.container:hover {
+  transform: rotateY(180deg);
+}
+.content.one .details {
+  margin-top: 10px;
+}
+.content.two .inputbox {
+  font-size: 18px;
+}
+.content.two .inputbox input[type="radio"] {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.content.two .inputbox input[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: var(--content-bg);
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--color-white);
+  transition: background-color 0.2s;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+.content.two .inputbox input[type="submit"]:hover {
+  background-color: #2868c7;
+  transition: background-color 0.2s;
+}
