@@ -1,7 +1,16 @@
 <?php
 session_start();
 // include_once('db_con.php');
-include('db_con.php');
+// include('db_con.php');
+
+// Database connection info.
+$DATABASE_HOST = '127.0.0.1:3307';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'phplogin';
+
+global $con;
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 
 // If there is an error with the connection, stop the script and display the error.
 if ( mysqli_connect_errno() ) {
