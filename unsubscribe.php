@@ -1,9 +1,9 @@
 <?php  
 session_start();
-include_once('/php/db_con.php');
+include_once('db_con.php');
 
 if ($account['activation_code'] != 'activated') {
-	header("Location: /index.html");
+	header("Location: index.html");
 }
 
 if(@$_POST['submit']){
@@ -17,6 +17,6 @@ if(@$_POST['submit']){
   header("Location: acknowledgement.html");
 }
 else{
-  header("Location: /php/home.php");
+  header("Location: home.php");
 }
 ?>   

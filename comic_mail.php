@@ -1,6 +1,6 @@
 <?php
 // session_start();
-include_once('/php/db_con.php');
+include_once('db_con.php');
 
 // $unsubscribe_value = $con->prepare('select unsubscribe from accounts where id = ?');
 // $unsubscribe_value->bind_param('i', $_SESSION['id']);

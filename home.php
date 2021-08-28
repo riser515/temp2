@@ -4,7 +4,7 @@ session_start();
 
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: /index.html');
+	header('Location: index.html');
 	exit;
 }
 ?>
@@ -24,16 +24,16 @@ if (!isset($_SESSION['loggedin'])) {
     <nav>
       <ul>
         <li>
-          <a href="/php/home.php">Home</a>
+          <a href="home.php">Home</a>
         </li>
         <li>
-          <a href="/profile.html">Profile</a>
+          <a href="profile.html">Profile</a>
           </li>
         <li>
-          <a href="/unsubscribe.html">Unsubscribe</a>
+          <a href="unsubscribe.html">Unsubscribe</a>
         </li>
         <li>
-          <a href="/php/logout.php">Logout</a>
+          <a href="logout.php">Logout</a>
         </li>
       </ul>
     </nav>
