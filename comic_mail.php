@@ -2,14 +2,6 @@
 // session_start();
 include_once('db_con.php');
 
-// $unsubscribe_value = $con->prepare('select unsubscribe from accounts where id = ?');
-// $unsubscribe_value->bind_param('i', $_SESSION['id']);
-// $unsubscribe_value->execute();
-// // $unsubscribe_value->store_result();
-// $result = $unsubscribe_value->get_result();
-// $result = $result->fetch_array();
-// $saved = $result['unsubscribe'];
-
 function newComic(){
         $url = "https://c.xkcd.com/random/comic/";
         $ch  = curl_init();
