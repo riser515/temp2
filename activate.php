@@ -31,7 +31,7 @@ if (isset($_POST['code'])) {
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="/css/parallax.css" />
+    <link rel="stylesheet" type="text/css" href="css/parallax.css" />
   </head>
   <body>
     <div class="container">

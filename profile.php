@@ -13,11 +13,7 @@ if (mysqli_connect_errno()) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-if ($account['activation_code'] != 'activated') {
-	header("Location: index.html");
-} 
-
-if($_POST['continue']){
+if(@$_POST['continue'] == 1){
   // We don't have the password or email info stored in sessions so instead we can get the results from the database.
   $stmt = $con->prepare('SELECT password, email FROM accounts WHERE id = ?');
   // In this case we can use the account ID to get the account info.
@@ -34,8 +30,8 @@ else{
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="/css/parallax.css" />
-    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="css/parallax.css" />
+    <link rel="stylesheet" type="text/css" href="css/nav.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

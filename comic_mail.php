@@ -50,7 +50,7 @@ function newComic(){
         <body> 
             <h1>'.$imgTitle.'</h1>
             <img src='.$imgLink.' alt='.$imgAlt.'<br>
-            <a href="http://localhost:8080/phplogin/unsubscribe.php">Unsubscribe KomixDose?</a>
+            <br><a href="http://localhost:8080/phplogin/unsubscribe.php">Unsubscribe KomixDose?</a>
         </body>
         </html>';
 

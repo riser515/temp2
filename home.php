@@ -11,8 +11,8 @@ if (!isset($_SESSION['loggedin'])) {
 
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="/css/parallax.css" />
-    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="css/parallax.css" />
+    <link rel="stylesheet" type="text/css" href="css/nav.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
