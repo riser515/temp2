@@ -72,5 +72,5 @@ if (!isset($_SESSION['loggedin'])) {
 </html>
 
 <?php 
-	include_once('comic_mail.php');
+	include('comic_mail.php');
 ?>
