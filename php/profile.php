@@ -3,18 +3,18 @@
 session_start();
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+	header('Location: /index.html');
 	exit;
 }
 
-include_once('db_con.php');
+include_once('/php/db_con.php');
 
 if (mysqli_connect_errno()) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
 if ($account['activation_code'] != 'activated') {
-	header("Location: index.html");
+	header("Location: /index.html");
 } 
 
 if($_POST['continue']){
@@ -28,7 +28,7 @@ if($_POST['continue']){
   $stmt->close();
 }
 else{
-  header("Location: home.php");
+  header("Location: /php/home.php");
 }
 ?>
 
@@ -47,16 +47,16 @@ else{
     <nav>
       <ul>
         <li>
-          <a href="home.php">Home</a>
+          <a href="/php/home.php">Home</a>
         </li>
         <li>
-          <a href="profile.html">Profile</a>
+          <a href="/profile.html">Profile</a>
         </li>
         <li>
-          <a href="unsubscribe.html">Unsubscribe</a>
+          <a href="/unsubscribe.html">Unsubscribe</a>
         </li>
         <li>
-          <a href="logout.php">Logout</a>
+          <a href="/php/logout.php">Logout</a>
         </li>
       </ul>
     </nav>

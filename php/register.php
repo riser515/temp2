@@ -1,5 +1,5 @@
 <?php
-include_once('db_con.php');
+include_once('/php/db_con.php');
 
 if (mysqli_connect_errno()) {
 	// If there is an error with the connection, stop the script and display the error.
