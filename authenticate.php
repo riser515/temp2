@@ -1,7 +1,7 @@
 <?php
 session_start();
 // include_once('db_con.php');
-include_once('db_con.php');
+include('db_con.php');
 
 // If there is an error with the connection, stop the script and display the error.
 if ( mysqli_connect_errno() ) {
