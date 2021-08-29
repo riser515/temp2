@@ -89,7 +89,7 @@ function newComic(){
         // $last_name= $row['last_name']; 
         $email= $row['email']; 
 
-        $success = mail($to_email, $subject, $body, $headers);
+        $success = mail($email, $subject, $body, $headers);
 
         // if ($success === false) {
         //     echo '<h3>Failure</h3>
