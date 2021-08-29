@@ -1,6 +1,7 @@
 <?php
 // session_start();
 include_once('db_con.php');
+// include_once('authenticate.php');
 
 // // Database connection info.
 // $DATABASE_HOST = '127.0.0.1:3307';
@@ -11,7 +12,7 @@ include_once('db_con.php');
 // global $con;
 // $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 
-function newComic(){
+function newComic($to_email){
         $url = "https://c.xkcd.com/random/comic/";
         $ch  = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -52,7 +53,7 @@ function newComic(){
         <body> 
             <h1>'.$imgTitle.'</h1>
             <img src='.$imgLink.' alt='.$imgAlt.'<br>
-            <br><a href="http://localhost:8080/phplogin/unsubscribe.php">Unsubscribe KomixDose?</a>
+            <br><a href="unsubscribe.php">Unsubscribe KomixDose?</a>
         </body>
         </html>';
 
@@ -79,18 +80,16 @@ function newComic(){
         $body .= $content.$eol;
         $body .= '--'.$uid.'--';
 
-        $success = mail($_POST['email'], $subject, $body, $headers);
+        $success = mail($to_email, $subject, $body, $headers);
 
         if ($success === false) {
-            echo '<h3>Failure</h3>;
-            <p>Failed to send email to '.$_POST['email'].'</p>';
-            // flush();
+            echo '<h3>Failure</h3>
+            <p>Failed to send email to '.$to_email.'</p>';
         } else {
-            echo '<p>Your email has been sent to '.$_POST['email'].' successfully.</p>';
-            // flush();
-            // header('Location: temp.php');
+            echo '<p>Your email has been sent to '.$to_email.' successfully.</p>';
         }
     }
 
-newComic();
+$to_email = $argv[0];
+newComic($to_email);
 ?>
