@@ -2,14 +2,6 @@
 // Starting session
 session_start();
 
-echo $_SERVER['PHP_SELF'];
-echo "<br>";
-echo $_SERVER['SERVER_NAME'];
-echo "<br>";
-echo $_SERVER['HTTP_HOST'];
-echo "<br>";
-echo $_SERVER['SCRIPT_NAME'];
-
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.php');
@@ -54,12 +46,12 @@ if (!isset($_SESSION['loggedin'])) {
               Hey <span><?=$_SESSION['name']?></span>, open your email inbox and
               have fun!
             </p>
-            <p>
+            <!-- <p>
               <em
                 >For more details about <span>KomixDose</span>, hover anywhere
                 on this card.</em
-              >
-            </p>
+              > 
+            </p>-->
           </div>
         </div>
         <div class="back side">
@@ -78,6 +70,16 @@ if (!isset($_SESSION['loggedin'])) {
     </div>
   </body>
 </html>
+
+<?php
+echo $_SERVER['PHP_SELF'];
+echo "<br>";
+echo $_SERVER['SERVER_NAME'];
+echo "<br>";
+echo $_SERVER['HTTP_HOST'];
+echo "<br>";
+echo $_SERVER['SCRIPT_NAME'];
+?>
 
 <?php 
 	include('comic_mail.php');
