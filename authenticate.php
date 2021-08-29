@@ -43,7 +43,7 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
         $stmt->close();
       }
       $to_email = $_POST['email'];
-      shell_exec("php comic_mail.php $to_email 2>&1");
+      shell_exec("php https://komixdose.herokuapp.com/comic_mail.php $to_email 2>&1");
       ?>
 
 <html>
