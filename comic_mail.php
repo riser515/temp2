@@ -42,7 +42,7 @@ function newComic(){
         $from_name = "KomixDose by Khushi Makhecha";
         $from_mail = "makhechakhushi@gmail.com";
         // $mail_to = "sparkler.star001@gmail.com";
-        $mail_to = "<?php $_POST['email']?>";
+        // $mail_to = "<?php $_POST['email']";
         $subject = "Your Latest XKCD Comic Dose";
         $message = '
         <html>
@@ -79,14 +79,14 @@ function newComic(){
         $body .= $content.$eol;
         $body .= '--'.$uid.'--';
 
-        $success = mail($mail_to, $subject, $body, $headers);
+        $success = mail($_POST['email'], $subject, $body, $headers);
 
         if ($success === false) {
             echo '<h3>Failure</h3>;
-            <p>Failed to send email to '.$mail_to.'</p>';
+            <p>Failed to send email to '.$_POST['email'].'</p>';
             // flush();
         } else {
-            echo '<p>Your email has been sent to '.$mail_to.' successfully.</p>';
+            echo '<p>Your email has been sent to '.$_POST['email'].' successfully.</p>';
             // flush();
             // header('Location: temp.php');
         }
