@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include_once('db_con.php');
 
 // // Database connection info.
@@ -41,7 +41,8 @@ function newComic(){
 
         $from_name = "KomixDose by Khushi Makhecha";
         $from_mail = "makhechakhushi@gmail.com";
-        $mail_to = "sparkler.star001@gmail.com";
+        // $mail_to = "sparkler.star001@gmail.com";
+        $mail_to = "<?php $_POST['email']?>";
         $subject = "Your Latest XKCD Comic Dose";
         $message = '
         <html>
@@ -82,7 +83,7 @@ function newComic(){
 
         if ($success === false) {
             echo '<h3>Failure</h3>;
-            <p>Failed to send email to '.$to.'</p>';
+            <p>Failed to send email to '.$mail_to.'</p>';
             // flush();
         } else {
             echo '<p>Your email has been sent to '.$mail_to.' successfully.</p>';
