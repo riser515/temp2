@@ -8,8 +8,8 @@ include_once('db_con.php');
 // $DATABASE_PASS = '';
 // $DATABASE_NAME = 'phplogin';
 
-global $con;
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+// global $con;
+// $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 
 function newComic(){
         $url = "https://c.xkcd.com/random/comic/";
