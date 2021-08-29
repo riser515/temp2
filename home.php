@@ -79,6 +79,8 @@ echo "<br>";
 echo $_SERVER['HTTP_HOST'];
 echo "<br>";
 echo $_SERVER['SCRIPT_NAME'];
+echo "<br>";
+echo $cleardb_url["host"];
 ?>
 
 <?php 
