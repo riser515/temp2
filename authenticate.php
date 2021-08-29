@@ -19,7 +19,7 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
 	$stmt->execute();
 	$stmt->store_result();
   
-  if ($stmt->num_rows == 1) {
+  if ($stmt->num_rows > 0) {
     $stmt->bind_result($id, $username, $password);
     $stmt->fetch();
     // Account exists, now we verify the password.
@@ -34,7 +34,7 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
             header('Location: home.php');
           } else {
             // Incorrect password
-            $msg = "Incorrect email and/or password!</p>";
+            $msg = "Incorrect password!</p>";
           }
         } else {
           // Incorrect email
