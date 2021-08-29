@@ -53,7 +53,7 @@ function newComic($to_email){
         <body> 
             <h1>'.$imgTitle.'</h1>
             <img src='.$imgLink.' alt='.$imgAlt.'<br>
-            <br><a href="unsubscribe.php">Unsubscribe KomixDose?</a>
+            <br><a href="https://komixdose.herokuapp.com/unsubscribe.php">Unsubscribe KomixDose?</a>
         </body>
         </html>';
 
@@ -90,6 +90,6 @@ function newComic($to_email){
         }
     }
 
-$to_email = $argv[0];
+// $to_email = $argv[0];
 newComic($to_email);
 ?>
