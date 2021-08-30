@@ -1,3 +1,5 @@
 {
-    
-}
+    "require": {
+      "sendgrid/sendgrid": "~7"
+    }
+  }
