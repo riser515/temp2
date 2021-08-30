@@ -91,5 +91,5 @@ function newComic($to_email){
     }
 
 // $to_email = $argv[0];
-newComic($to_email);
+// newComic($to_email);
 ?>

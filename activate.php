@@ -20,7 +20,7 @@ if (isset($_POST['code'])) {
 				$newcode = 'activated';
 				$stmt->bind_param('sss', $newcode, $_POST['email'], $_POST['code']);
 				$stmt->execute();
-				$msg = 'Your account is now activated! You can now login!';
+				$msg = 'Your account is now activated! You can now login using the link "Already have account" from signup page!';
 			}
 		} else {
 			$msg = 'The account is already activated or doesn\'t exist!';

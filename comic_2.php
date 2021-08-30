@@ -3,7 +3,7 @@
 include_once('db_con.php');
 // include_once('authenticate.php');
 
-// // Database connection info.
+// Database connection info.
 // $DATABASE_HOST = '127.0.0.1:3307';
 // $DATABASE_USER = 'root';
 // $DATABASE_PASS = '';
@@ -80,26 +80,26 @@ function newComic(){
         $body .= $content.$eol;
         $body .= '--'.$uid.'--';
 
-        $query= "SELECT * FROM $accounts"; 
-        $result= mysqli_query ($con, $query)  
-        or die ('Error querying database.'); 
+        global $con;
+        $query = "SELECT * FROM accounts"; 
+        $result = mysqli_query ($con, $query);
         
         while ($row = mysqli_fetch_array($result)) { 
-        // $first_name= $row['first_name']; 
-        // $last_name= $row['last_name']; 
-        $email= $row['email']; 
+            $email= $row["email"]; 
 
-        $success = mail($email, $subject, $body, $headers);
+            $success = mail($email, $subject, $body, $headers);
+            // mail($email, $subject, $body, $headers);
 
-        // if ($success === false) {
-        //     echo '<h3>Failure</h3>
-        //     <p>Failed to send email to '.$to_email.'</p>';
-        // } else {
-        //     echo '<p>Your email has been sent to '.$to_email.' successfully.</p>';
-        // }
-        }
+            if ($success === false) {
+                echo '<h3>Failure</h3>
+                <p>Failed to send email to '.$email.'</p>';
+            } else {
+                echo '<p>Your email has been sent to '.$email.' successfully.</p>';
+            }
     }
+}
 
 // $to_email = $argv[0];
 newComic();
+mysqli_close($con);
 ?>
