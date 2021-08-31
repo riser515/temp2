@@ -53,38 +53,36 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ?')) 
             $stmt->bind_param('ssss', $_POST['username'], $password, $_POST['email'], $uniqid);
             $stmt->execute();
             
-			$from_name = "KomixDose by Khushi Makhecha";
-			$from_mail = "makhechakhushi@gmail.com";
-            $subject = 'Account Activation Required';
-            $message = '
-			<html>
-			<body>
-			<p>Please enter this code to activate your account: ' . $uniqid. ' </p>
-			</body>
-			</html>
-			';
-			
-			// A random hash for sending mixed content.
-			$uid = md5(uniqid(time()));
-			$eol = PHP_EOL;
+            require_once 'config.php';
+            require 'vendor/autoload.php'; 
 
-			$headers = "From: ".$from_name." <".$from_mail.">".$eol;
-			$headers .= 'MIME-Version: 1.0'.$eol;
-			$headers .= "Content-Type: multipart/mixed; boundary=\"{$uid}\"".$eol;
-			
-			// Message.
-			$body  = '--'.$uid.$eol;
-			$body .= "Content-Type: text/html; charset=\"UTF-8\"".$eol;
-			$body .= 'Content-Transfer-Encoding: 7bit'.$eol;
-			$body .= $message.$eol;
+            $email = new \SendGrid\Mail\Mail(); 
+            // $email = new SendGrid\Email();
+            $email->setFrom("makhechakhushi@gmail.com", "KomixDose by Khushi Makhecha");
+            $email->setSubject("Account Activation Required");
+            $email->addTo($_POST['email'], "Subscribed User");
+            // $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
+            $email->addContent(
+                "text/html", "
+                <html>
+                <body>
+                <p>Please enter this code to activate your account: " . $uniqid. " </p>
+                </body>
+                </html>
+                "
+            );
 
-            $success = mail($_POST['email'], $subject, $body, $headers);
+            $sendgrid = new \SendGrid(SENDGRID_API_KEY);
 
-			if ($success === false) {
-				$msg = '<p>Failed to send email to '.$_POST['email'].'</p>';
-			} else {
-				$msg = '<p>Your registration otp has been sent to '.$_POST['email'].' successfully.</p>';
-			}
+            $response = $sendgrid->send($email);
+            $statCode = $response->statusCode() . "\n";
+
+            if($statCode == 202){
+                $msg = '<p>Your registration otp has been sent to '.$_POST['email'].' successfully.</p>';
+            }
+            else{
+                $msg = '<p>Failed to send email to '.$_POST['email'].'</p>';
+            }
         } else {
             // Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
             $msg = 'Technical issue encountered!';
