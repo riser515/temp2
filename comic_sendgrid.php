@@ -1,5 +1,4 @@
 <?php
-
 include_once 'db_con.php';
 require_once 'config.php';
 require 'vendor/autoload.php'; 
@@ -40,9 +39,13 @@ function newComic(){
 
         global $con;
         $query = "SELECT * FROM accounts"; 
-        $result = mysqli_query ($con, $query);
+        $result = mysqli_query ($con, $query) or die(mysqli_error($con));
         
         while ($row = mysqli_fetch_array($result)) { 
+            // if (!$row) {
+            //     printf("Error: %s\n", mysqli_error($con));
+            //     exit();
+            // }
             $mail_to= $row["email"];
 
         $email = new \SendGrid\Mail\Mail(); 
@@ -78,8 +81,18 @@ function newComic(){
             // <p>Failed to send email to '.$email.'</p>';
         }
     }
+    // mysqli_close($con);
+    echo "Successfully executed newComic()";
 }
 
 newComic();
-mysqli_close($con);
+// while(true){
+//     $starter = time();
+//     echo $starter;
+//     newComic();
+//     $end = time();
+//     echo $end;
+//     echo "Next line of while loop";
+//     sleep(120 - ($starter - $end));
+// }
 ?>
