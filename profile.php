@@ -74,7 +74,7 @@ else{
             <p class="details">
               <span>Password:</span>
               Your password is
-              <?=strlen($_SESSION['name'])?>
+              <?=strlen($_SESSION['password'])?>
               characters long.
             </p>
 
