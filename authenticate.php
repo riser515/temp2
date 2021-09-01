@@ -31,6 +31,7 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $username;
             $_SESSION['id'] = $id;
+            $_SESSION['activated'] = 'activated';
             header('Location: home.php');
           } else {
             // Incorrect password

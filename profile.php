@@ -11,11 +11,6 @@ include_once('db_con.php');
 
 if (mysqli_connect_errno()) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-}
-
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.php');
-	exit;
 } 
 
 if(@$_POST['continue'] == 1){
