@@ -13,9 +13,10 @@ if (mysqli_connect_errno()) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-// if ($account['activation_code'] != 'activated') {
-// 	header("Location: index.php");
-// } 
+if (!isset($_SESSION['loggedin'])) {
+	header('Location: index.php');
+	exit;
+} 
 
 if(@$_POST['continue'] == 1){
   // We don't have the password or email info stored in sessions so instead we can get the results from the database.
@@ -73,8 +74,8 @@ else{
 
             <p class="details">
               <span>Password:</span>
-              Your password is
-              <?=strlen($_SESSION['password'])?>
+              Your encrypted password is
+              <?=strlen($password)?>
               characters long.
             </p>
 

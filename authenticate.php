@@ -38,7 +38,7 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
           }
         } else {
           // Incorrect email
-          $msg = 'Incorrect email address!';
+          $msg = 'Unregistered Email Address! Please signup using "Don\'t have account?" from our login page.';
         }
         $stmt->close();
       }
@@ -51,24 +51,26 @@ if ($stmt = $con->prepare('SELECT id, username, password FROM accounts WHERE ema
     <link rel="stylesheet" type="text/css" href="css/parallax.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="front side">
-        <div class="content one">
-          <h1>KomixDose</h1>
-          <p><?php echo $msg; ?></p>
-          <p><em>For more details about <span>KomixDose</span>, hover anywhere on this card.</em></p>
+    <div class="body__container">
+      <div class="container">
+        <div class="front side">
+          <div class="content one">
+            <h1>KomixDose</h1>
+            <p><?php echo $msg; ?></p>
+            <p><em>For more details about <span>KomixDose</span>, hover anywhere on this card.</em></p>
+          </div>
         </div>
-      </div>
-      <div class="back side">
-        <div class="content two">
-          <p>
-            "Subscribe to KomixDose to receive hilarious comics every 5 minutes,
-            in your mail box!"
-          </p>
-          <p>
-            "We provide free random comics from the well-known webcomic
-            <a href="https://c.xkcd.com/random/comic/">XKCD Comics</a>."
-          </p>
+        <div class="back side">
+          <div class="content two">
+            <p>
+              "Subscribe to KomixDose to receive hilarious comics every 5 minutes,
+              in your mail box!"
+            </p>
+            <p>
+              "We provide free random comics from the well-known webcomic
+              <a href="https://c.xkcd.com/random/comic/">XKCD Comics</a>."
+            </p>
+          </div>
         </div>
       </div>
     </div>

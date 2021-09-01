@@ -53,7 +53,7 @@ function newComic(){
         <body> 
             <h1>'.$imgTitle.'</h1>
             <img src='.$imgLink.' alt='.$imgAlt.'<br>
-            <br><a href="https://komixdose.herokuapp.com/unsubscribe.php">Unsubscribe KomixDose?</a>
+            <br><a href="https://komixdose.herokuapp.com/unsubscribe.html">Unsubscribe KomixDose?</a>
         </body>
         </html>';
 
@@ -81,7 +81,7 @@ function newComic(){
         $body .= '--'.$uid.'--';
 
         global $con;
-        $query = "SELECT * FROM accounts"; 
+        $query = "SELECT * FROM accounts WHERE activation_code = 'activated'"; 
         $result = mysqli_query ($con, $query);
         
         while ($row = mysqli_fetch_array($result)) { 

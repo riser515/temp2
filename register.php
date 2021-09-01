@@ -102,33 +102,35 @@ $con->close();
     <link rel="stylesheet" type="text/css" href="css/register_input.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="front side">
-        <div class="content one">
-          <h1>KomixDose</h1>
-          <p><?php echo $msg; ?></p>
-          <p><em>Hover anywhere on this card and enter the otp received in your email.</em></p>
+    <div class="body__container">
+      <div class="container">
+        <div class="front side">
+          <div class="content one">
+            <h1>KomixDose</h1>
+            <p><?php echo $msg; ?></p>
+            <p><em>Hover anywhere on this card and enter the otp received in your email.</em></p>
+          </div>
         </div>
-      </div>
-      <div class="back side">
-        <div class="content two">
-		  <form action="activate.php" method="post" autocomplete="off">
-		  <input
-				type="email"
-				name="email"
-				placeholder="Enter your registered email id"
-				id="email"
-				required
-			/>
-			<input
-				type="text"
-				name="code"
-				placeholder="Enter received code"
-				id="code"
-				required
-			/>
-			<input id="ver__button" type="submit" value="Verify" />
-		  </form>
+        <div class="back side">
+          <div class="content two">
+            <form action="activate.php" method="post" autocomplete="off">
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your registered email id"
+              id="email"
+              required
+            />
+            <input
+              type="text"
+              name="code"
+              placeholder="Enter received code"
+              id="code"
+              required
+            />
+            <input id="ver__button" type="submit" value="Verify" />
+            </form>
+          </div>
         </div>
       </div>
     </div>
